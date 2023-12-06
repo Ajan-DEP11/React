@@ -1,18 +1,26 @@
 
 import './App.css'
-import {useState} from "react";
+import {useRef, useState} from "react";
 
 function App() {
 
     const [value,setValue] =useState("");
     const [checked,setChecked] = useState(true);
+     const txtElm =useRef<HTMLInputElement>(null)
+
+    function handleButtonclick(){
+        txtElm.current!.focus();
+    }
 
 
   return (
     <>
         <h1>React Forms</h1>
-        <label><input type="checkbox" checked={checked} onChange={e=>setChecked(e.target.checked)}/>Enable</label><br/>
+        <label><input type="checkbox" checked={checked}
+                      ref={txtElm}
+                      onChange={e=>setChecked(e.target.checked)}/>Enable</label><br/>
         <input type="text" value={value} disabled={!checked} onChange={e =>setValue(e.target.value)}/>
+        <button>Click me</button>
         <h3>Out Put</h3>
         <div>{value}</div>
     </>
